@@ -8,8 +8,8 @@ Connect it with createStore(slice.reducer) for one slice, multiple slices would 
 
 ```js
 {
-  reducer: {myFirstSlice: Slice1, mySecondSlice: Slice2 }
+  "reducer": rootReducer
 }
 ```
 
-No more action identifier worries. Just Export const myAction = Slice1.actions and import it in the appropriate component, then dispatch(myAction.method(payload))
+No more action identifier worries. Just Export const myAction = Slice1.actions and import it in the appropriate component, then dispatch(myAction.method(payload)).
