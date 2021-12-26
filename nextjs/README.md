@@ -2,12 +2,12 @@
 
 Taking to the heart, what it takes to have the best of both worlds (React, SSR and SEO).
 
-## [Initial Impression](initial-impression.md)
+## [Initial Impression](./initial-impression)
 
-## [\_document.js](_document.md)
+## [\_document.js](./_document)
 
-## [\_app.js](_app.md)
+## [\_app.js](./_app)
 
-## [\server.js](server.md)
+## [\server.js](./server)
 
-## [\web-performance.js](performance.md)
+## [\web-performance.js](./web-performance)
