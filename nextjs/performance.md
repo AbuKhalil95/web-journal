@@ -38,6 +38,20 @@ This represents the percieved page load that users have to wait in order to star
 
 `<img>`, `<image>` inside `<svg>`, `<video>`, elements with `url()` css, and html blocks with text children. And the value is determined by the load of the largest element of these, in terms of width and height and not byte size, visible to the user viewport.
 
+Recalculation of size or position does not cause a new LCP trigger, only the original render does, which affects elements that are rendered off-screen then enters viewport (not counted), or those that are rendered on viewport then goes offscreen (counted). The calculations are finished once the page are fully loaded, or is interrupted by user scroll, tap or keyboard click.
+
+Resources are calculated by their load time instead of render time for security reasons, to enable for render time we would need to enable [Timing Allow Origin](https://developer.mozilla.org/docs/Web/HTTP/Headers/Timing-Allow-Origin).
+
+A good measure for LCP to handle it directly is to use [`getLCP` from `web-vitals`](https://github.com/GoogleChrome/web-vitals/blob/master/src/getLCP.ts):
+
+```js
+import {getLCP} from 'web-vitals';
+
+// Measure and log LCP as soon as it's available.
+getLCP(console.log);
+```
+
+With some similarities to FCP, [LCP optimizations are available to follow](https://web.dev/optimize-lcp/)
 ### Time to Interactive (TTI)
 
 According to the MDN docs, TTI reflect the time it took for the last **long task** to finish followed by 5 seconds of inactivity, this is important since the **long task** represents a task that blocks the thread for more than 50ms, they could be:
@@ -45,6 +59,12 @@ According to the MDN docs, TTI reflect the time it took for the last **long task
 - Long Running Event Handlers
 - Expensive Reflows (and re-renders for react)
 - Browser work with the event loop that takes more than 50ms to finish.
+
+![TTI image](../resources/tti.svg)
+
+Most of the performance fixes are applicable to others, in addition to two points that were not mentioned:
+- Minimize chaining critical request, which can be ebst explained as resources critical to render, that are grouped together causeing long blocking time, important to notice and can be fixed by deferring, ordering load times with preloading or optimizing its sizes.
+- Keeping resource counte low and transfer sizes small, which is already done with `next.js` via code splitting and tree shaking but could use more [scrutiny to make sure its working well](https://stackoverflow.com/questions/64485105/all-nextjs-pages-have-almost-the-same-js-bundle-size). 
 
 ### Total Blocking Time
 
