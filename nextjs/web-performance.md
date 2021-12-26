@@ -1,4 +1,4 @@
-# Build to be fast
+# Websites Built to be Fast
 
 One of the concerns when doing static or server side generation, _other than SEO_, is how fast can your page load. Many metrics are used to indicate such speed but can never measure raw speed. One of the tools used in this example will be [lighthouse](https://developers.google.com/web/tools/lighthouse).
 
@@ -32,6 +32,12 @@ This represents the moment the page loads, to the moment the first content rende
 
 ### Speed Index
 
+This index shows how the visual progression of the website looks like on load, it uses [Speedline](https://github.com/paulirish/speedline) that takes literal frames from a video recorder to calculate the duration between the first visual change and last visual change. Histogram is used to display the amount of visual change is made with time.
+
+One main change that could affect this score other than what was mentione above:
+
+- Ensure text remains visible during webfont load. This usually happens due to browsers hiding text until font loads. This can be enforced with `font-display: swap` to the font css or `&display=swap` to the google link, along with preloading web font links.
+
 ### Largest Contentful (LCP)
 
 This represents the percieved page load that users have to wait in order to start seeing the main content, which usually is around 2.5s for the best experience. The following represents LCP:
@@ -45,13 +51,14 @@ Resources are calculated by their load time instead of render time for security 
 A good measure for LCP to handle it directly is to use [`getLCP` from `web-vitals`](https://github.com/GoogleChrome/web-vitals/blob/master/src/getLCP.ts):
 
 ```js
-import {getLCP} from 'web-vitals';
+import { getLCP } from "web-vitals";
 
 // Measure and log LCP as soon as it's available.
 getLCP(console.log);
 ```
 
 With some similarities to FCP, [LCP optimizations are available to follow](https://web.dev/optimize-lcp/)
+
 ### Time to Interactive (TTI)
 
 According to the MDN docs, TTI reflect the time it took for the last **long task** to finish followed by 5 seconds of inactivity, this is important since the **long task** represents a task that blocks the thread for more than 50ms, they could be:
@@ -63,9 +70,28 @@ According to the MDN docs, TTI reflect the time it took for the last **long task
 ![TTI image](../resources/tti.svg)
 
 Most of the performance fixes are applicable to others, in addition to two points that were not mentioned:
-- Minimize chaining critical request, which can be ebst explained as resources critical to render, that are grouped together causeing long blocking time, important to notice and can be fixed by deferring, ordering load times with preloading or optimizing its sizes.
-- Keeping resource counte low and transfer sizes small, which is already done with `next.js` via code splitting and tree shaking but could use more [scrutiny to make sure its working well](https://stackoverflow.com/questions/64485105/all-nextjs-pages-have-almost-the-same-js-bundle-size). 
 
-### Total Blocking Time
+- Minimize chaining critical request, which can be ebst explained as resources critical to render, that are grouped together causeing long blocking time, important to notice and can be fixed by deferring, ordering load times with preloading or optimizing its sizes.
+- Keeping resource counte low and transfer sizes small, which is already done with `next.js` via code splitting and tree shaking but could use more [scrutiny to make sure its working well](https://stackoverflow.com/questions/64485105/all-nextjs-pages-have-almost-the-same-js-bundle-size).
+
+### Total Blocking Time (TBT)
+
+This represents the time spend on total, for the sum of single tasks that takes longer than 50ms to complete. The visual defines what is counted as 345ms total blocking time instead of 560ms total processing time.
+
+![tbt image](../resources/tbt.svg).
+
+TTI relates to TBT that it shows the severity of the blocking tasks on the time it takes to be fully responsive, such as small 50ms tasks with less than 5 seconds in between acts as a single big blocking task for that duration for TTI, but in terms of TBT, it shows how little impact the small tasks to user experience with a small number, however on large numbers is does reflect worst user experience.
 
 ### Cumulative Layout Shift
+
+One of the least performance impact, but most user experience affective score. This is what you would expect if the website gets sudden burst of layout changes while its loading. The layout change, unless required by user input is generally undesireable and could be harmful in cases of made transactions that could be mistaken because a button shifted into the click or to somewhere else.
+
+The score is calculated by using the largest burst (1 second long) of layout shift score that happens during the lifespan of a page, this happens when an element has a position change between frames of 1 second, for a duration of 5 seconds max as the window duration. It's formula is defined with:
+`layout shift score = impact fraction * distance fraction` where the impact fraction is the total area of the affected layout shift related to the viewport, multiplied by the distance that occured to the affected elements moving from one layout to the next.
+
+Expected layout shifts don't trigger the score calculation, and includes the following:
+
+- User induced layout shift (any shift within 500ms of user interaction)
+- Animations using CSS transform (use scale instead of width and height, and translate to move it instead of top, bottom, left and right).
+
+[prefers-reduced-motion](https://web.dev/prefers-reduced-motion/) is a media query that helps define alternative, slower or less motion for users that has it enabled.
