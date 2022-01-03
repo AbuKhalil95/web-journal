@@ -8,5 +8,9 @@ Erlang VM is mentioned (aka BEAM where Elixir is built on top of), that makes us
 
 ### But wait! Lets first [install](https://elixir-lang.org/getting-started/introduction.html).
 
-## `iex` to Start Interactive
+## [`iex`](https://elixir-lang.org/getting-started/io-and-the-file-system.html#the-path-module) to Start Interactive.
+Funtionalities that you could use at interactive are called modules, and the ones that will be mentioned are `IO`, `File` and `Path`.
+
+### `IO`
+Where Input Output magic happens, `:stdio` 
 

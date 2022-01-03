@@ -10,11 +10,11 @@ Static rendering improves time-to-first-byte (TTFB) by rendering content at buil
 
 Rendering on Nextjs could be quite confusing, [the following information](https://developers.google.com/web/updates/2019/02/rendering-on-the-web) has the most important aspects that are widely used for rendering on the web.
 
+```md
 - SSR: Server-Side Rendering - rendering a client-side or universal app to HTML on the server.
 - CSR: Client-Side Rendering - rendering an app in a browser, generally using the DOM.
 - Rehydration: “booting up” JavaScript views on the client such that they reuse the server-rendered HTML’s DOM tree and data.
 - Prerendering: running a client-side application at build time to capture its initial state as static HTML.
-Performance
 
 And the following keywords will be used to represent certain performance metrics that are relavant for each part of code performance optimization.
 
@@ -22,6 +22,7 @@ And the following keywords will be used to represent certain performance metrics
 - FP: First Paint - the first time any pixel gets becomes visible to the user.
 - FCP: First Contentful Paint - the time when requested content (article body, etc) becomes visible.
 - TTI: Time To Interactive - the time at which a page becomes interactive (events wired up, etc).
+```
 
 ## What Happens on the Server?
 
