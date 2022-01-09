@@ -5,3 +5,5 @@ All things about using Vue.js as a react developer, in the hope of increasing fl
 ## Vue.js as your view engine
 
 - [Intial Impression](initial-impression.md)
+- [The Object Initial](object.md)
+- [How HTML Works](html.md)
