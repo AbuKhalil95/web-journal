@@ -20,7 +20,10 @@ Inside, we would find the following:
 
 - fixtures: as the name suggests, it stores dummy data and "fixed" stuff in order to be used by the suite.
 - integration: where the folders and its subsequest test files are grouped into suites of independent test.
-- plugins: extends the functionality of cypress.
+- plugins: extends the functionality of cypress, with event listeners and such.
+- screenshots: is where failed test cases are screenshotted.
+- support: holds any scripts that are just ugly, too long or we want to reuse it.
+- videos: is created once video capture flag is turned on (true).
 
 ## A peek inside
 
