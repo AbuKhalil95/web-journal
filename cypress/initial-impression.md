@@ -24,6 +24,7 @@ Inside, we would find the following:
 - screenshots: is where failed test cases are screenshotted.
 - support: holds any scripts that are just ugly, too long or we want to reuse it.
 - videos: is created once video capture flag is turned on (true).
+- cypress.json: is an important file where changes to configuration can be made, these changes are reflected to the ones in **settings tab**.
 
 ## A peek inside
 
