@@ -10,3 +10,4 @@ All things about using Vue.js as a react developer, in the hope of increasing fl
 - [How CSS Works](css.md)
 - [How JS/Computed/Watcher Works](computed-watcher.md)
 - [The Rendering of Vue.js](rendering.md)
+- [The Bureaucracy of Events and Forms](events.md)
