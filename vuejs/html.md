@@ -28,7 +28,7 @@ The syntax is exactly the one used with [Mustache](https://mustache.github.io/),
 
 Rendering JS expressions is possible within Vue.js with the following syntax.
 
-```html
+```vue
 {{ number + 1 }} 
 <!-- but not  -->
 {{ var a = 1 }} 
