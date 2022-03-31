@@ -28,6 +28,7 @@ The syntax is exactly the one used with [Mustache](https://mustache.github.io/),
 
 Rendering JS expressions is possible within Vue.js with the following syntax.
 
+{% raw %}
 ```vue
 {{ number + 1 }} 
 <!-- but not  -->
@@ -36,12 +37,13 @@ Rendering JS expressions is possible within Vue.js with the following syntax.
 
 {{ ok ? 'YES' : 'NO' }}
 <!-- but not  -->
-{{ if (ok) { return message } }} 
+{{ if (ok) { return message } /\}\}/
 
 {{ message.split('').reverse().join('') }}
 
 <div v-bind:id="'list-' + id"></div>
 ```
+{% endraw %}
 
 But its possible to use [other globals](https://github.com/vuejs/vue/blob/v2.6.10/src/core/instance/proxy.js#L9) to use within the Vue.js evaluation of expressions.
 
