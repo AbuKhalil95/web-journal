@@ -20,4 +20,10 @@ Working this way allows for a neat, sequential data manipulation that in additio
 
 ### Static
 
-Having both statically typed system and type inference seems like a leap for that kind of systems, thus allowing you to catch most errors at compile time, leaving very little room for runtime errors.
+Having both statically typed system and type inference seems like a leap for that kind of systems, thus allowing you to catch most errors at compile time, leaving very little room for runtime errors. 
+
+### And Is Smart
+
+Or atleast built by smart people, haskell means a lot more when it comes to being concice and elegant. And to understand the beauty that is in the eye of the beholder, we have to try and become one ourselves.
+
+## [Lets Dive In, Then!](first-steps.md)
